@@ -1,0 +1,27 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "loom-context",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-10-19",
+	"compatibility_flags": ["nodejs_compat"],
+	"observability": { "enabled": true },
+	"containers": [
+		{
+			"class_name": "Extractor",
+			"image": "./container/Dockerfile",
+			"instance_type": "standard-1",
+			"max_instances": 10
+		}
+	],
+	"durable_objects": {
+		"bindings": [{ "class_name": "Extractor", "name": "EXTRACTOR" }]
+	},
+	"migrations": [{ "tag": "v1", "new_sqlite_classes": ["Extractor"] }],
+	"r2_buckets": [{ "binding": "CACHE", "bucket_name": "loom-context-cache" }],
+	"ratelimits": [
+		// Every MCP request (cheap: list tools, cached results).
+		{ "name": "MCP_LIMITER", "namespace_id": "1101", "simple": { "limit": 120, "period": 60 } },
+		// Cache misses that start a container download.
+		{ "name": "EXTRACT_LIMITER", "namespace_id": "1102", "simple": { "limit": 10, "period": 60 } }
+	]
+}
