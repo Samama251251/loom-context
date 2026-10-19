@@ -1,0 +1,12 @@
+{
+	"name": "loom-context",
+	"description": "Claude Code plugins for watching Loom videos",
+	"owner": { "name": "Samama" },
+	"plugins": [
+		{
+			"name": "loom",
+			"source": "./plugin",
+			"description": "Let Claude watch Loom videos: transcript plus key frames from any public loom.com link"
+		}
+	]
+}

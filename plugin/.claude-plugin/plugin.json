@@ -1,0 +1,8 @@
+{
+	"name": "loom",
+	"version": "1.0.0",
+	"description": "Let Claude watch Loom videos: transcript plus key frames from any public loom.com link",
+	"author": { "name": "Samama" },
+	"repository": "https://github.com/Samama251251/loom-context",
+	"keywords": ["loom", "video", "mcp", "screen-recording"]
+}
